@@ -19,7 +19,6 @@ class UserController extends Controller
             $token = JWTToken::CreateJWTToken($request->input('email'));
             return response()->json(['data' => $token, 'msg' => 'success']);
         } else {
-
             return response()->json(['data' => 'unauthorized', 'msg' => 'success']);
         }
     }
@@ -46,8 +45,16 @@ class UserController extends Controller
         }
     }
 
-    public function VerifyOtp()
+    public function VerifyOtp(Request $request)
     {
+        $result = User::where($request->input())->count();
+        if ($result == 1) {
+            //
+            User::where($request->input())->update(['otp' => 0]);
+            return response()->json(['data' => 'Verified', 'msg' => 'success']);
+        } else {
+            return response()->json(['data' => 'Couldn Verify', 'msg' => 'Failed']);
+        }
     }
     public function SetPassword()
     {
