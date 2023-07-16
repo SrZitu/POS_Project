@@ -95,7 +95,7 @@
                                                             <td class="pad">
                                                                 <div class="alignment" align="center"
                                                                     style="line-height:10px"><img
-                                                                        src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/0db9f180-d222-4b2b-9371-cf9393bf4764/0bd8b69e-4024-4f26-9010-6e2a146401fb/Group%201152.svg"
+                                                                        src="https://img.freepik.com/free-vector/hand-drawn-iranian-women-illustration_23-2149855924.jpg?w=740&t=st=1689470006~exp=1689470606~hmac=eb71008c7d9334a57b7799aa3113c4a84ccdcd1ef3c48f3470aed1d9eb68aedd"
                                                                         style="display:block;height:auto;border:0;width:140px;max-width:100%"
                                                                         width="140"></div>
                                                             </td>

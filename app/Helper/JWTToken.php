@@ -23,8 +23,22 @@ class JWTToken
 
         return JWT::encode($payload, $key, 'HS256');
     }
+        public static function CreateJWTForResetPassword($userEmail): string
+    {
+        $key = env('JWT_KEY');
 
-    public static function DecodeToken($token)
+        $payload = [
+            'iss' => 'laravel_JWT',
+            'iat' => time(),
+            'exp' => time() + 60 * 60,
+            'userEmail' => $userEmail
+        ];
+
+        return JWT::encode($payload, $key, 'HS256');
+    }
+
+
+    public static function VarifyToken($token)
     {
         try {
 
