@@ -22,11 +22,11 @@ class TokenVarificationMiddleware
 
         if ($result == 'Unauthorized') {
             return response()->json([
-                'data' => 'Couldn Verify',
-                'msg' => 'Failed To Verify Token!'
+                'status' => 'Couldn Verify',
+                'message' => 'Failed To Verify Token!'
             ], 401);
         } else {
-            $request->headers->set('email', $result);
+            $request->headers->set('email',$result);
             return $next($request);
         }
     }

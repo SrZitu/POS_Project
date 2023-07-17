@@ -13,20 +13,72 @@ use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
+
+    function LoginPage()
+    {
+        return view('pages.auth.login-page');
+    }
+    function RegistrationPage()
+    {
+        return view('pages.auth.registration-page');
+    }
+    function SendOtpPage()
+    {
+        return view('pages.auth.send-otp-page');
+    }
+    function VerifyOTPPage()
+    {
+        return view('pages.auth.verify-otp-page');
+    }
+    function ResetPasswordPage()
+    {
+        return view('pages.auth.reset-pass-page');
+    }
+
     public function UserLogin(Request $request)
     {
-        $result = User::where($request->input())->count();
-        if ($result == 1) {
+        $count = User::where('email', '=', $request->input('email'))
+            ->where('password', '=', $request->input('password'))
+            ->count();
+
+        if ($count == 1) {
+            // User Login-> JWT Token Issue
             $token = JWTToken::CreateJWTToken($request->input('email'));
-            return response()->json(['data' => $token, 'msg' => 'success']);
+
+            return response()->json([
+                'status' => 'success!',
+                'message' => 'User Login Successfully!'
+            ], 200)
+                ->cookie('token', $token, 60 * 60 * 24);
         } else {
-            return response()->json(['data' => 'unauthorized', 'msg' => 'success']);
+            return response()->json([
+                'message' => 'unauthorized',
+                'status' => 'failed'
+            ], 401);
         }
     }
 
     public function UserRegistration(Request $request)
     {
-        return User::create($request->input());
+        // return User::create($request->input());
+        try {
+            User::create([
+                'firstName' => $request->input('firstName'),
+                'lastName' => $request->input('lastName'),
+                'email' => $request->input('email'),
+                'mobile' => $request->input('mobile'),
+                'password' => $request->input('password'),
+            ]);
+            return response()->json([
+                'status' => 'success',
+                'message' => 'User Registration Successfully'
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'User Registration Failed ! From Back-End'
+            ], 400);
+        }
     }
 
     public function SendOtpToEmail(Request $request)
@@ -40,9 +92,15 @@ class UserController extends Controller
             Mail::to($userMail)->send(new OTPEmail($otp));
             //
             User::where($request->input())->update(['otp' => $otp]);
-            return response()->json(['data' => 'Otp Has Sent To Your Email', 'msg' => 'success']);
+            return response()->json([
+                'status' => 'Otp Has Sent To Your Email',
+                'message' => 'success'
+            ]);
         } else {
-            return response()->json(['data' => 'Otp Failed To Send', 'msg' => 'Failed']);
+            return response()->json([
+                'status' => 'Otp Failed To Send',
+                'message' => 'Failed'
+            ]);
         }
     }
 
@@ -64,20 +122,20 @@ class UserController extends Controller
 
             return response()->json(
                 [
-                    'data' => 'Verified',
-                    'msg' => 'success',
+                    'status' => 'Verified',
+                    'message' => 'success',
                     'token' => $token
                 ],
                 200
-            );
+            )->cookie('token', $token, 60 * 60 * 24);;
         } else {
             return response()->json([
-                'data' => 'Could not Verify',
-                'msg' => 'Failed'
+                'status' => 'Could not Verify',
+                'message' => 'Failed'
             ], 401);
         }
     }
-    
+
     public function ResetPassword(Request $request)
     {
         try {
@@ -86,17 +144,18 @@ class UserController extends Controller
             $password = $request->input('password');
 
             User::where('email', $email)->update(['password' => $password]);
+            // Remove Cookie...
             return response()->json(
                 [
-                    'data' => 'Verified',
-                    'msg' => 'Request Successful',
+                    'status' => 'Verified',
+                    'message' => 'Request Successful',
                 ],
                 200
             );
         } catch (Exception $e) {
             return response()->json([
-                'data' => 'Could not Verify',
-                'msg' => 'Something Went Wrong!'
+                'status' => 'Could not Verify',
+                'message' => 'Something Went Wrong!'
             ], 401);
         }
     }
