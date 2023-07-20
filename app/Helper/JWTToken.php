@@ -23,7 +23,7 @@ class JWTToken
 
         return JWT::encode($payload, $key, 'HS256');
     }
-        public static function CreateJWTForResetPassword($userEmail): string
+    public static function CreateJWTForResetPassword($userEmail): string
     {
         $key = env('JWT_KEY');
 
@@ -37,7 +37,6 @@ class JWTToken
         return JWT::encode($payload, $key, 'HS256');
     }
 
-
     public static function VarifyToken($token)
     {
         try {
@@ -50,5 +49,7 @@ class JWTToken
         } catch (Exception $e) {
             return "Unauthorized";
         }
+
     }
-}
+
+    }

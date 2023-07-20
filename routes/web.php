@@ -17,7 +17,7 @@ use App\Http\Middleware\TokenVarificationMiddleware;
 */
 
 Route::get('/', function () {
-    return view('pages.auth.registration-page');
+    return view('pages.auth.login-page');
 });
 
 Route::Post('/User-Login', [UserController::class, 'UserLogin']);

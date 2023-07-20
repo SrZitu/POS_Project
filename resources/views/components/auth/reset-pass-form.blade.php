@@ -33,6 +33,7 @@
         }
         else{
             let res=await axios.post("/Reset-Password",{password:pass});
+            console.log(res);
             if(res.status===200){
                 window.location.href="/userLogin"
             }
