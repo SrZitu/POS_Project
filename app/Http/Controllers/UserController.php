@@ -35,15 +35,22 @@ class UserController extends Controller
         return view('pages.auth.reset-pass-page');
     }
 
+    function ProfilePage()
+    {
+        return view('pages.dashboard.profile-page');
+    }
+
+
     public function UserLogin(Request $request)
     {
         $count = User::where('email', '=', $request->input('email'))
             ->where('password', '=', $request->input('password'))
-            ->count();
+            ->select('id')->first();
 
-        if ($count == 1) {
+        if ($count !== null) {
             // User Login-> JWT Token Issue
-            $token = JWTToken::CreateJWTToken($request->input('email'));
+            //as count is an object so extracting id from the count object and passing it as 2nd parameter
+            $token = JWTToken::CreateJWTToken($request->input('email'), $count->id);
 
             return response()->json([
                 'status' => 'success!',
@@ -160,9 +167,64 @@ class UserController extends Controller
         }
     }
 
-    //after login
 
-    public function ProfileUpdate()
+    //after login
+    function UserLogout()
     {
+        //cookie parameters and their discription below
+        //cookie name,cookie value('' means its assigning null value), cookie time(here -1 means cookie will have no time)
+        return redirect('/userLogin')->cookie('token', '', -1);
+    }
+
+    public function userProfile(Request $request)
+    {
+        try {
+            $email = $request->header('email');
+            $user = User::where('email', $email)->first();
+            return response()->json(
+                [
+                    'status' => 'success',
+                    'message' => 'Request Successful',
+                    'data' => $user
+                ],
+                200
+            );
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'Failed',
+                'message' => 'Something Went Wrong!'
+            ], 401);
+        }
+    }
+    public function updateProfile(Request $request)
+    {
+        try {
+            $email = $request->header('email');
+            $firstName = $request->input('firstName');
+            $lastName = $request->input('lastName');
+            $mobile = $request->input('mobile');
+            $password = $request->input('password');
+
+            User::where('email', $email)->update([
+                'firstName' => $firstName,
+                'lastName' => $lastName,
+                'mobile' => $mobile,
+                'password' => $password,
+
+            ]);
+            return response()->json(
+                [
+                    'status' => 'success',
+                    'message' => 'Request Successful',
+
+                ],
+                200
+            );
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'Failed',
+                'message' => 'Something Went Wrong!'
+            ], 401);
+        }
     }
 }

@@ -1,8 +1,8 @@
 function showLoader() {
-    document.getElementById('loader').classList.remove('d-none')
+    document.getElementById("loader").classList.remove("d-none");
 }
 function hideLoader() {
-    document.getElementById('loader').classList.add('d-none')
+    document.getElementById("loader").classList.add("d-none");
 }
 
 function successToast(msg) {
@@ -12,8 +12,8 @@ function successToast(msg) {
         text: msg,
         className: "mt-5",
         style: {
-            background: "green",
-        }
+            background: "#a88beb",
+        },
     }).showToast();
 }
 
@@ -25,6 +25,6 @@ function errorToast(msg) {
         className: "mt-5",
         style: {
             background: "red",
-        }
+        },
     }).showToast();
 }

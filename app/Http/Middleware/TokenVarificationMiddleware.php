@@ -21,12 +21,11 @@ class TokenVarificationMiddleware
         $result = JWTToken::VarifyToken($token);
 
         if ($result == 'Unauthorized') {
-            return response()->json([
-                'status' => 'Couldn Verify',
-                'message' => 'Failed To Verify Token!'
-            ], 401);
+            return redirect('/userLogin');
         } else {
-            $request->headers->set('email',$result);
+            $request->headers->set('email', $result->userEmail);
+            $request->headers->set('id', $result->userId);
+
             return $next($request);
         }
     }
