@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -56,3 +57,11 @@ Route::post('create-Customers', [CustomerController::class, 'createCustomer'])->
 Route::get('customersList', [CustomerController::class, 'customersList'])->middleware([TokenVarificationMiddleware::class]);
 Route::post('customerUpdate', [CustomerController::class, 'customerUpdate'])->middleware([TokenVarificationMiddleware::class]);
 Route::post('customerDelete', [CustomerController::class, 'customerDelete'])->middleware([TokenVarificationMiddleware::class]);
+
+
+//Category Api Route
+
+Route::post('createCategory', [CategoryController::class, 'createCategory'])->middleware([TokenVarificationMiddleware::class]);
+Route::get('CategoryList', [CategoryController::class, 'CategoryList'])->middleware([TokenVarificationMiddleware::class]);
+Route::post('CategoryUpdate', [CategoryController::class, 'CategoryUpdate'])->middleware([TokenVarificationMiddleware::class]);
+Route::post('CategoryDelete', [CategoryController::class, 'CategoryDelete'])->middleware([TokenVarificationMiddleware::class]);
