@@ -5,6 +5,7 @@ use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProductController;
 use App\Http\Middleware\TokenVarificationMiddleware;
 
 /*
@@ -44,9 +45,10 @@ Route::get('/verifyOtp', [UserController::class, 'VerifyOTPPage']);
 Route::get('/resetPassword', [UserController::class, 'ResetPasswordPage'])->middleware([TokenVarificationMiddleware::class]);
 
 //logout
-
 Route::get('/logout', [UserController::class, 'UserLogout']);
+
 //Dashboard After Authentication
+
 Route::get('/dashboard', [DashboardController::class, 'DashboardPage'])->middleware([TokenVarificationMiddleware::class]);
 Route::get('/userProfile', [UserController::class, 'ProfilePage'])->middleware([TokenVarificationMiddleware::class]);
 
@@ -65,3 +67,11 @@ Route::post('createCategory', [CategoryController::class, 'createCategory'])->mi
 Route::get('CategoryList', [CategoryController::class, 'CategoryList'])->middleware([TokenVarificationMiddleware::class]);
 Route::post('CategoryUpdate', [CategoryController::class, 'CategoryUpdate'])->middleware([TokenVarificationMiddleware::class]);
 Route::post('CategoryDelete', [CategoryController::class, 'CategoryDelete'])->middleware([TokenVarificationMiddleware::class]);
+
+
+//Product Api Route
+
+Route::post('CreateProduct', [ProductController::class, 'CreateProduct'])->middleware([TokenVarificationMiddleware::class]);
+Route::get('ProductList', [ProductController::class, 'ProductList'])->middleware([TokenVarificationMiddleware::class]);
+Route::post('UpdateProduct', [ProductController::class, 'UpdateProduct'])->middleware([TokenVarificationMiddleware::class]);
+Route::post('DeleteProduct', [ProductController::class, 'DeleteProduct'])->middleware([TokenVarificationMiddleware::class]);
