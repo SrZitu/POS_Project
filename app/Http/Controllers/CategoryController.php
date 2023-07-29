@@ -8,44 +8,25 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+
+    public function categoryPage()
+    {
+        return view('pages.dashboard.category');
+    }
     public function createCategory(Request $request)
     {
-        try {
-            $user_id = $request->header('id');
-            Category::create([
-                'name' => $request->input('name'),
-                'user_id' => $user_id
-            ]);
 
-            return response()->json([
-                'status' => 'success!',
-                'message' => 'Category Created Successfully!'
-            ], 200);
-        } catch (Exception $e) {
-            return response()->json([
-                'message' => 'unauthorized',
-                'status' => 'failed'
-            ], 401);
-        }
+        $user_id = $request->header('id');
+        return Category::create([
+            'name' => $request->input('name'),
+            'user_id' => $user_id
+        ]);
     }
 
     public function CategoryList(Request $request)
     {
-
-        try {
-            $user_id = $request->header('id');
-
-            Category::where('user_id', $user_id)->get();
-            return response()->json([
-                'status' => 'success!',
-                'message' => 'Your Customer List!'
-            ], 200);
-        } catch (Exception $e) {
-            return response()->json([
-                'message' => 'unauthorized',
-                'status' => 'failed'
-            ], 401);
-        }
+        $user_id = $request->header('id');
+        return Category::where('user_id', $user_id)->latest()->get();
     }
 
     public function CategoryUpdate(Request $request)
@@ -74,22 +55,11 @@ class CategoryController extends Controller
 
     public function CategoryDelete(Request $request)
     {
-        try {
-            $user_id = $request->header('id');
-            $category_id = $request->input('id');
-            Category::where('user_id', $user_id)
-                ->where('id', $category_id)
-                ->delete();
 
-            return response()->json([
-                'status' => 'success!',
-                'message' => 'Deleted Successfully!'
-            ], 200);
-        } catch (Exception $e) {
-            return response()->json([
-                'message' => 'Could not Delete Data',
-                'status' => 'failed'
-            ], 401);
-        }
+        $user_id = $request->header('id');
+        $category_id = $request->input('id');
+        return Category::where('user_id', $user_id)
+            ->where('id', $category_id)
+            ->delete();
     }
 }

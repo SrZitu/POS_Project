@@ -38,6 +38,8 @@ a:hover {
   cursor: pointer;
 }
 
+
+
 .swal2-styled:focus{
   box-shadow: none !important;
 }
@@ -47,20 +49,8 @@ a:hover {
     /* fallback for old browsers */
     background-color: #f8ceec;
     background-image: linear-gradient(315deg, #f8ceec 0%, #a88beb 74%);
+}
 
-
-    /* Chrome 10-25, Safari 5.1-6 */
-    /* background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1)); */
-    background-color: #f8ceec;
-    background-image: linear-gradient(315deg, #f8ceec 0%, #a88beb 74%);
-
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    /* background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1)) */
-    /* background: radial-gradient(circle at 10% 20%, rgb(163, 175, 243) 0%, rgb(220, 182, 232) 100.2%); */
-    background-color: #f8ceec;
-    background-image: linear-gradient(315deg, #f8ceec 0%, #a88beb 74%);
-
-    }
 
   .gradient-text
 {
@@ -74,3 +64,53 @@ a:hover {
 .text-color{
 color: #a88beb;
 }
+
+.side-bar-item, .side-bar-item-caption {
+    color: #a88beb;
+}
+
+
+/* modal */
+/* Add custom styles for the modal */
+
+
+.custom-modal .modal-content {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border: none;
+    border-radius: 10px;
+}
+
+.custom-btn
+ {
+    color: #333333;
+    background-color: #a88beb;
+}
+.custom-modal .modal-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+
+.custom-modal .form-control {
+    border-radius: 10px;
+    border: none;
+}
+
+.table tbody tr.even {
+    background-color: #f8f8f8; /* Lighter background color for even rows */
+  }
+
+  .table tbody tr.odd {
+    background-color: #f0f0f0; /* Slightly darker background color for odd rows */
+  }
+
+  .table {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+
+  .table thead th {
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+  }
