@@ -31,26 +31,21 @@ class CategoryController extends Controller
 
     public function CategoryUpdate(Request $request)
     {
+        $user_id = $request->header('id');
+        $category_id = $request->input('id');
 
-        try {
-            $user_id = $request->header('id');
-            $category_id = $request->input('id');
-            Category::where('user_id', $user_id)
-                ->where('id', $category_id)
-                ->update([
-                    'name' => $request->input('name'),
-                ]);
+        return Category::where('user_id', $user_id)
+            ->where('id', $category_id)->update(['name' => $request->input('name')]);
+    }
 
-            return response()->json([
-                'status' => 'success!',
-                'message' => 'Category Updated Successfully!'
-            ], 200);
-        } catch (Exception $e) {
-            return response()->json([
-                'message' => 'Could not Update Data',
-                'status' => 'failed'
-            ], 401);
-        }
+    public function CategoryId(Request $request)
+    {
+
+        $user_id = $request->header('id');
+        $category_id = $request->input('id');
+        return Category::where('user_id', $user_id)
+            ->where('id', $category_id)
+            ->first();
     }
 
     public function CategoryDelete(Request $request)

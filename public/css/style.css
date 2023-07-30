@@ -38,8 +38,6 @@ a:hover {
   cursor: pointer;
 }
 
-
-
 .swal2-styled:focus{
   box-shadow: none !important;
 }
@@ -106,11 +104,11 @@ color: #a88beb;
   }
 
 .table tbody tr.even {
-    background-color: #f8f8f8; /* Lighter background color for even rows */
+    background-color: #f8f8f8;
   }
 
   .table tbody tr.odd {
-    background-color: #f0f0f0; /* Slightly darker background color for odd rows */
+    background-color: #f0f0f0;
   }
 
   .table {

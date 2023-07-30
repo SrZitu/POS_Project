@@ -8,7 +8,7 @@
                 <input class="d-none" id="deleteID"/>
             </div>
             <div class="modal-body mx-3 ">
-                <div class="modal-footer flex justify-content-center align-content-center ">
+                <div class="modal-footer flex justify-content-center align-content-center">
                     <button type="button" id="delete-modal-close" class="btn shadow-sm custom-btn" data-bs-dismiss="modal">Cancel</button>
                     <button onclick="itemDelete()" type="button" id="confirmDelete" class="btn shadow-sm btn-danger" >Delete</button>
                 </div>
