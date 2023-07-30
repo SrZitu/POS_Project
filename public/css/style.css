@@ -96,6 +96,15 @@ color: #a88beb;
     border: none;
 }
 
+.deleteBtn {
+    color: #ffffff;
+    background-color: #ff4d4d;
+  }
+
+  .deleteBtn:hover {
+    background-color: #e63939;
+  }
+
 .table tbody tr.even {
     background-color: #f8f8f8; /* Lighter background color for even rows */
   }

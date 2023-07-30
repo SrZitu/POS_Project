@@ -63,7 +63,7 @@ Route::post('customerDelete', [CustomerController::class, 'customerDelete'])->mi
 
 //Category Api Route
 Route::get('categoryPage', [CategoryController::class, 'categoryPage'])->middleware([TokenVarificationMiddleware::class]);
-Route::post('createCategory', [CategoryController::class, 'createCategory'])->middleware([TokenVarificationMiddleware::class]);
+Route::post('/createCategory', [CategoryController::class, 'createCategory'])->middleware([TokenVarificationMiddleware::class]);
 Route::get('CategoryList', [CategoryController::class, 'CategoryList'])->middleware([TokenVarificationMiddleware::class]);
 Route::post('CategoryUpdate', [CategoryController::class, 'CategoryUpdate'])->middleware([TokenVarificationMiddleware::class]);
 Route::post('CategoryDelete', [CategoryController::class, 'CategoryDelete'])->middleware([TokenVarificationMiddleware::class]);

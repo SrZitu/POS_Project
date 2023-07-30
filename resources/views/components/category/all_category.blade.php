@@ -62,7 +62,7 @@
         $('.deleteBtn').on('click', function() {
             let id = $(this).data('id');
             $("#delete-modal").modal('show');
-            // $("#deleteID").val(id);
+            $("#deleteID").val(id);
         })
 
         new DataTable('#tableData', {
