@@ -80,7 +80,7 @@
             <span class="side-bar-item-caption">Category</span>
         </a>
 
-        <a href="{{url("/")}}" class="side-bar-item">
+        <a href="{{url("/ProductList")}}" class="side-bar-item">
             <i class="fa fa-chevron-circle-right "></i>
             <span class="side-bar-item-caption">Product</span>
         </a>

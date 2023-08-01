@@ -46,7 +46,7 @@
         } else {
 
             document.getElementById('modal-close').click();
-            
+
             showLoader();
             let res = await axios.post("/CategoryUpdate", {
                 name: categoryName,

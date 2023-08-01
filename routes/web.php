@@ -54,10 +54,11 @@ Route::get('/userProfile', [UserController::class, 'ProfilePage'])->middleware([
 
 
 //Cutomer Api Route
-
+Route::get('/customerPage', [CustomerController::class, 'customerPage'])->middleware([TokenVarificationMiddleware::class]);
 Route::post('create-Customers', [CustomerController::class, 'createCustomer'])->middleware([TokenVarificationMiddleware::class]);
 Route::get('customersList', [CustomerController::class, 'customersList'])->middleware([TokenVarificationMiddleware::class]);
-Route::post('customerUpdate', [CustomerController::class, 'customerUpdate'])->middleware([TokenVarificationMiddleware::class]);
+Route::post('/CustomerId', [CustomerController::class, 'CustomerId'])->middleware([TokenVarificationMiddleware::class]);
+Route::post('/customerUpdate', [CustomerController::class, 'customerUpdate'])->middleware([TokenVarificationMiddleware::class]);
 Route::post('customerDelete', [CustomerController::class, 'customerDelete'])->middleware([TokenVarificationMiddleware::class]);
 
 

@@ -67,6 +67,11 @@ color: #a88beb;
     color: #a88beb;
 }
 
+.side-bar-item.active {
+    background-color: #f0f0f0;
+    color: #007bff;
+}
+
 
 /* modal */
 /* Add custom styles for the modal */
