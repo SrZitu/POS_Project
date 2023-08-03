@@ -1,10 +1,10 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-12 col-sm-12 col-lg-12">
+        <div class="col-12 col-md-12 col-sm-12 col-lg-12">
             <div class="card px-5 py-5">
                 <div class="row justify-content-between ">
                     <div class="align-items-center col">
-                        <h4>Customers</h4>
+                        <h4>Product</h4>
                     </div>
                     <div class="align-items-center col">
                         <button data-bs-toggle="modal" data-bs-target="#create-modal"
@@ -18,8 +18,9 @@
                         <tr class="bg-light">
                             <th>No</th>
                             <th>Name</th>
-                             <th>Email</th>
-                             <th>Mobile</th>
+                            <th>Image</th>
+                             <th>Price</th>
+                             <th>Unit</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -34,10 +35,10 @@
 
 
 <script>
-    getAllCustomer()
-    async function getAllCustomer() {
+    getAllProduct()
+    async function getAllProduct() {
         showLoader()
-        let response = await axios.get('/customersList')
+        let response = await axios.get('/ProductList')
         hideLoader()
 
         let tableData = $('#tableData')
@@ -52,12 +53,12 @@
     <tr>
         <td> ${index+1}</td>
         <td> ${item['name']}</td>
-         <td> ${item['email']}</td>
-         <td> ${item['mobile']}</td>
-
+        <td> <img src= ${item['img_url']} alt="img not found" class="w-40 h-auto"></td>
+         <td> ${item['price']}</td>
+         <td> ${item['unit']}</td>
         <td>
-            <button data-id="${item['id']}" class="btn editBtn btn-sm custom-btn ">Edit</button>
-            <button data-id="${item['id']}" class="btn deleteBtn btn-sm custom-btn">Delete</button>
+            <button data-path="${item['img_url']}" data-id="${item['id']}" class="btn editBtn btn-sm custom-btn ">Edit</button>
+            <button data-path="${item['img_url']}" data-id="${item['id']}" class="btn deleteBtn btn-sm custom-btn">Delete</button>
         </td>
     </tr>
 

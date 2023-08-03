@@ -75,7 +75,7 @@ Route::post('/CategoryId', [CategoryController::class, 'CategoryId'])->middlewar
 
 
 //Product Api Route
-
+Route::get('productPage', [ProductController::class, 'productPage'])->middleware([TokenVarificationMiddleware::class]);
 Route::post('CreateProduct', [ProductController::class, 'CreateProduct'])->middleware([TokenVarificationMiddleware::class]);
 Route::get('ProductList', [ProductController::class, 'ProductList'])->middleware([TokenVarificationMiddleware::class]);
 Route::post('UpdateProduct', [ProductController::class, 'UpdateProduct'])->middleware([TokenVarificationMiddleware::class]);
