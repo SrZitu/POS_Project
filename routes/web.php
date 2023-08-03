@@ -1,11 +1,14 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CustomerController;
+use App\Mail\PromotionalEmail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PromotionController;
 use App\Http\Middleware\TokenVarificationMiddleware;
 
 /*
@@ -77,3 +80,11 @@ Route::post('CreateProduct', [ProductController::class, 'CreateProduct'])->middl
 Route::get('ProductList', [ProductController::class, 'ProductList'])->middleware([TokenVarificationMiddleware::class]);
 Route::post('UpdateProduct', [ProductController::class, 'UpdateProduct'])->middleware([TokenVarificationMiddleware::class]);
 Route::post('DeleteProduct', [ProductController::class, 'DeleteProduct'])->middleware([TokenVarificationMiddleware::class]);
+
+
+//Promotional Mail routes
+Route::get('/promotional/mail', [PromotionController::class, 'promotionMailPage'])->name('promotion.page')
+    ->middleware([TokenVarificationMiddleware::class]);
+Route::post('/promotional/mail', [PromotionController::class, 'promotionMailSend'])->name('promotion.mail')
+    ->middleware([TokenVarificationMiddleware::class]);;
+

@@ -10,6 +10,11 @@
                         <button data-bs-toggle="modal" data-bs-target="#create-modal"
                             class="float-end btn m-0 btn-sm custom-btn">Create</button>
                     </div>
+                       <div class="align-items-center col">
+                        <a  href="{{ url('/sendMail') }}"
+                            class="float-end btn m-0 btn-sm custom-btn">Send Mail</a>
+                    </div>
+
                 </div>
                 <hr class="bg-dark " />
                 <table class="table" id="tableData">

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use App\Mail\PromotionalEmail;
+use Illuminate\Support\Facades\Mail;
 
 class CustomerController extends Controller
 {
@@ -73,4 +75,5 @@ class CustomerController extends Controller
             ], 401);
         }
     }
+
 }

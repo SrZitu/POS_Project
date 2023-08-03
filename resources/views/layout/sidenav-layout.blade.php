@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <title></title>
+    <title>@yield('site_title')</title>
     <link rel="icon" type="image/x-icon" href="{{asset('/favicon.ico')}}" />
     <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet" />
     <link href="{{asset('css/animate.min.css')}}" rel="stylesheet" />
@@ -96,6 +96,10 @@
             <span class="side-bar-item-caption">Report</span>
         </a>
 
+        <a href="{{route('promotion.page')}}" class="side-bar-item">
+            <i class="fa fa-envelope  "></i>
+            <span class="side-bar-item-caption">Promotional Mail</span>
+        </a>
 
     </div>
 
