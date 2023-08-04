@@ -19,8 +19,8 @@
                             <th>No</th>
                             <th>Name</th>
                             <th>Image</th>
-                             <th>Price</th>
-                             <th>Unit</th>
+                            <th>Price</th>
+                            <th>Unit</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -57,8 +57,9 @@
          <td> ${item['price']}</td>
          <td> ${item['unit']}</td>
         <td>
-            <button data-path="${item['img_url']}" data-id="${item['id']}" class="btn editBtn btn-sm custom-btn ">Edit</button>
-            <button data-path="${item['img_url']}" data-id="${item['id']}" class="btn deleteBtn btn-sm custom-btn">Delete</button>
+            <button data-path="${item['img_url']}" data-id="${item['id']}" class="btn editBtn btn-sm custom-btn">Edit</button>
+            <button data-path="${item['img_url']}" data-id="${item['id']}" class="btn btn-sm deleteBtn">Delete</button>
+
         </td>
     </tr>
 
@@ -66,18 +67,20 @@
             tableList.append(row)
         })
 
-        $('.editBtn').on('click', async function() {
+        $('#tableList').on('click', '.editBtn', async function() {
             let id = $(this).data('id');
-            await updatedFormId(id)
+            let filePath = $(this).data('path');
+            await fillUpUpdateForm(id, filePath);
             $("#update-modal").modal('show');
-        })
+        });
 
-        $('.deleteBtn').on('click', function() {
+        $('#tableList').on('click', '.deleteBtn', function() {
             let id = $(this).data('id');
+            let path = $(this).data('path');
             $("#delete-modal").modal('show');
             $("#deleteID").val(id);
-        })
-
+            $("#deleteFilePath").val(path);
+        });
         new DataTable('#tableData', {
 
             order: [

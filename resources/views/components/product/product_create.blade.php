@@ -23,17 +23,17 @@
                                 <div class="md-form mb-2">
                                     <i class="fas fa-list-alt prefix grey-text"></i>
                                     <label class="form-label">Product Name</label>
-                                    <input type="text" class="form-control" id="customerName">
+                                    <input type="text" class="form-control" id="productName">
                                 </div>
                                 <div class="md-form mb-2">
                                     <i class="fas fa-money-bill-wave prefix grey-text"></i>
                                     <label class="form-label">Price</label>
-                                    <input type="text" class="form-control" id="customerEmail">
+                                    <input type="text" class="form-control" id="productPrice">
                                 </div>
                                 <div class="md-form mb-2">
                                     <i class="fas fa-sort-amount-up"></i>
                                     <label class="form-label">Unit</label>
-                                    <input type="text" class="form-control" id="customerMobile">
+                                    <input type="text" class="form-control" id="productUnit">
                                 </div>
                                 <div class="md-form mb-2">
                                     <label class="form-label">Image</label>
@@ -61,33 +61,59 @@
 </div>
 
 <script>
+    fillCategory();
+    async function fillCategory() {
+        let response = await axios.get('/CategoryList');
+        response.data.forEach((item, index) => {
+            let option = `<option value="${item['id']}">${item['name']}</option>`
+            $('#productCategory').append(option);
+        });
+    }
+
     async function store() {
 
-        let customerName = document.getElementById('customerName').value;
-        let customerEmail = document.getElementById('customerEmail').value;
-        let customerMobile = document.getElementById('customerMobile').value;
+        let productCategory = document.getElementById('productCategory').value;
+        let productName = document.getElementById('productName').value;
+        let productPrice = document.getElementById('productPrice').value;
+        let productUnit = document.getElementById('productUnit').value;
+        let productImg = document.getElementById('productImg').files[0];
 
-        if (customerName.length === 0) {
-            errorToast('Customer Name is Required');
-        } else if (customerEmail.length === 0) {
-            errorToast('Customer Email is Required');
-        } else if (customerMobile.length === 0) {
-            errorToast('Customer Mobile number is Required');
+
+        if (productName.length === 0) {
+            errorToast('Product Name is Required');
+        } else if (productCategory.length === 0) {
+            errorToast('Product Category is Required');
+        } else if (productPrice.length === 0) {
+            errorToast('Product Price is Required');
+        } else if (productUnit.length === 0) {
+            errorToast('Product Unit is Required');
+        } else if (!productImg) {
+            errorToast('Product image is Required');
         } else {
 
             document.getElementById('modal-close').click();
 
+            let formData=new FormData();
+            formData.append('img', productImg)
+            formData.append('name', productName)
+            formData.append('price', productPrice)
+            formData.append('unit', productUnit)
+            formData.append('category_id', productCategory)
+
+            const config = {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            }
+
             showLoader();
             try {
-                let res = await axios.post("/create-Customers", {
-                    name: customerName,
-                    email: customerEmail,
-                    mobile: customerMobile
-                });
+                let res = await axios.post("/CreateProduct", formData, config);
+                console.log(res);
                 hideLoader();
 
                 if (res.status === 201) {
-                    successToast('Request Successful');
+                    successToast('Product Added Successfully');
                     document.getElementById("createForm").reset();
                     await getAllProduct();
                 } else {

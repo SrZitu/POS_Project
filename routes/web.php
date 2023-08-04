@@ -80,7 +80,7 @@ Route::post('CreateProduct', [ProductController::class, 'CreateProduct'])->middl
 Route::get('ProductList', [ProductController::class, 'ProductList'])->middleware([TokenVarificationMiddleware::class]);
 Route::post('UpdateProduct', [ProductController::class, 'UpdateProduct'])->middleware([TokenVarificationMiddleware::class]);
 Route::post('DeleteProduct', [ProductController::class, 'DeleteProduct'])->middleware([TokenVarificationMiddleware::class]);
-
+Route::post('ProductId', [ProductController::class, 'ProductId'])->middleware([TokenVarificationMiddleware::class]);
 
 //Promotional Mail routes
 Route::get('/promotional/mail', [PromotionController::class, 'promotionMailPage'])->name('promotion.page')
