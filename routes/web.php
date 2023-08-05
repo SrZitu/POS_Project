@@ -4,6 +4,7 @@ use App\Mail\PromotionalEmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
@@ -88,3 +89,9 @@ Route::get('/promotional/mail', [PromotionController::class, 'promotionMailPage'
 Route::post('/promotional/mail', [PromotionController::class, 'promotionMailSend'])->name('promotion.mail')
     ->middleware([TokenVarificationMiddleware::class]);;
 
+
+//Invoice Routes
+Route::post("/invoiceCreate",[InvoiceController::class,'invoiceCreate'])->middleware([TokenVarificationMiddleware::class]);
+Route::get("/displayInvoice",[InvoiceController::class,'displayInvoice'])->middleware([TokenVarificationMiddleware::class]);
+Route::post("/invoiceDetails",[InvoiceController::class,'invoiceDetails'])->middleware([TokenVarificationMiddleware::class]);
+Route::post("/invoiceDelete",[InvoiceController::class,'invoiceDelete'])->middleware([TokenVarificationMiddleware::class]);
