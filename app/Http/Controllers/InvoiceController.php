@@ -38,6 +38,7 @@ class InvoiceController extends Controller
 
             foreach ($products as $eachProduct) {
                 InvoiceProduct::create([
+                    'user_id'=>$user_id,
                     'invoice_id' => $invoice_id,
                     'product_id' => $eachProduct['product_id'],
                     'qty' => $eachProduct['qty'],
@@ -53,6 +54,8 @@ class InvoiceController extends Controller
         }
     }
 
+
+
     function displayInvoice(Request $request)
     {
 
@@ -65,7 +68,9 @@ class InvoiceController extends Controller
         $user_id = $request->header('id');
         $customerDetails = Customer::where('user_id', $user_id)->where('id', $request->input('customer_id'))->first();
         $invoiceTotal = Invoice::where('user_id', $user_id)->where('id', $request->input('invoice_id'))->first();
-        $invoiceProduct = InvoiceProduct::where('invoice_id', $request->input('invoice_id'))->get();
+        $invoiceProduct = InvoiceProduct::where('invoice_id', $request->input('invoice_id'))
+        ->where('user_id',$user_id)
+        ->get();
         return array(
             'customer' => $customerDetails,
             'invoice' => $invoiceTotal,
@@ -89,4 +94,5 @@ class InvoiceController extends Controller
             return 0;
         }
     }
+
 }
