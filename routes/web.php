@@ -95,3 +95,9 @@ Route::post("/invoiceCreate",[InvoiceController::class,'invoiceCreate'])->middle
 Route::get("/displayInvoice",[InvoiceController::class,'displayInvoice'])->middleware([TokenVarificationMiddleware::class]);
 Route::post("/invoiceDetails",[InvoiceController::class,'invoiceDetails'])->middleware([TokenVarificationMiddleware::class]);
 Route::post("/invoiceDelete",[InvoiceController::class,'invoiceDelete'])->middleware([TokenVarificationMiddleware::class]);
+
+//Sale Routes
+
+Route::get("/sale",[InvoiceController::class,'salePage'])->middleware([TokenVarificationMiddleware::class]);
+Route::get("/invoicePage",[InvoiceController::class,'invoicePage'])->middleware([TokenVarificationMiddleware::class]);
+

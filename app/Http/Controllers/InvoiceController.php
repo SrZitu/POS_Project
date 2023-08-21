@@ -2,15 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
-use App\Models\Invoice;
-use App\Models\InvoiceProduct;
 use Exception;
+use App\Models\Invoice;
+use App\Models\Customer;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
+use App\Models\InvoiceProduct;
 use Illuminate\Support\Facades\DB;
+
 
 class InvoiceController extends Controller
 {
+
+    function invoicePage():View{
+        return view('pages.dashboard.invoice');
+    }
+    function salePage(): View
+    {
+        return view('pages.dashboard.sale-page');
+    }
+
     function invoiceCreate(Request $request)
     {
         DB::beginTransaction();
@@ -38,7 +49,7 @@ class InvoiceController extends Controller
 
             foreach ($products as $eachProduct) {
                 InvoiceProduct::create([
-                    'user_id'=>$user_id,
+                    'user_id' => $user_id,
                     'invoice_id' => $invoice_id,
                     'product_id' => $eachProduct['product_id'],
                     'qty' => $eachProduct['qty'],
@@ -69,8 +80,8 @@ class InvoiceController extends Controller
         $customerDetails = Customer::where('user_id', $user_id)->where('id', $request->input('customer_id'))->first();
         $invoiceTotal = Invoice::where('user_id', $user_id)->where('id', $request->input('invoice_id'))->first();
         $invoiceProduct = InvoiceProduct::where('invoice_id', $request->input('invoice_id'))
-        ->where('user_id',$user_id)
-        ->get();
+            ->where('user_id', $user_id)
+            ->get();
         return array(
             'customer' => $customerDetails,
             'invoice' => $invoiceTotal,
@@ -80,7 +91,7 @@ class InvoiceController extends Controller
 
     function invoiceDelete(Request $request)
     {
-       DB::beginTransaction();
+        DB::beginTransaction();
         try {
 
             $user_id = $request->header('id');
@@ -94,5 +105,4 @@ class InvoiceController extends Controller
             return 0;
         }
     }
-
 }

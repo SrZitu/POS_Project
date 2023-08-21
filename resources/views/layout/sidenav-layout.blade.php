@@ -85,14 +85,18 @@
             <span class="side-bar-item-caption">Product</span>
         </a>
 
+        <a href="{{url("/sale")}}" class="side-bar-item">
+            <i class="	fa fa-shopping-bag "></i>
+            <span class="side-bar-item-caption">Create Sale</span>
+        </a>
 
-        <a href="#Getting-Started" class="side-bar-item">
-            <i class="fa fa-chevron-circle-right  "></i>
+        <a href="{{url('/invoicePage')}}" class="side-bar-item">
+            <i class="fa fa-receipt"></i>
             <span class="side-bar-item-caption">Invoice</span>
         </a>
 
-        <a href="#Getting-Started" class="side-bar-item">
-            <i class="fa fa-chevron-circle-right "></i>
+        <a href="#Getting-Started" class="side-bar-item">invoicePage
+            <i class="fa fa-bar-chart"></i>
             <span class="side-bar-item-caption">Report</span>
         </a>
 
